@@ -22,3 +22,4 @@ Auth::routes();
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
 Route::get('/{Category:slug}', [App\Http\Controllers\CategoryController::class, 'show_by_slug'])->name('categories.show_by_slug');
 Route::resource('/categories', App\Http\Controllers\CategoryController::class);
+Route::resource('/posts', App\Http\Controllers\PostController::class);
