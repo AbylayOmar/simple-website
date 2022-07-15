@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('main');
-});
+})->name('main');
 
 Auth::routes();
 
-Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
 Route::get('/{Category:slug}', [App\Http\Controllers\CategoryController::class, 'show_by_slug'])->name('categories.show_by_slug');
 Route::resource('/categories', App\Http\Controllers\CategoryController::class);

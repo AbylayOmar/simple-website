@@ -11,6 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -35,9 +37,9 @@
         @endphp
         <nav class="py-2 bg-light border-bottom">
             <div class="container d-flex flex-wrap">
-            <ul class="nav me-auto">
+            <ul class="nav me-auto" id="navbar">
                 <li class="nav-item">
-                    <a href="#" class="nav-link link-dark px-2 active" aria-current="page">Главная</a>
+                    <a href="{{ route('main') }}" class="nav-link link-dark px-2">Главная</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link link-dark px-2 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,6 +51,11 @@
                         @endforeach
                     </ul>
                 </li>
+                @auth 
+                <li class="nav-item">
+                    <a href="{{ route('admin') }}" class="nav-link link-dark px-2">Админ панель</a>
+                </li>
+                @endguest
             </ul>
             <ul class="nav">
                 @guest
@@ -80,5 +87,15 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $.each($('#navbar').find('li'), function() {
+                $(this).toggleClass('active', 
+                    window.location.pathname.indexOf($(this).find('a').attr('href')) > -1);
+            }); 
+        });
+    </script>
 </body>
 </html>
