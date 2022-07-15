@@ -2,12 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 
 class CategoryController extends Controller
 {
+
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->only('store');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,8 +49,9 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        
-        Category::create($request->validated());
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['name']);
+        Category::create($data);
         return back()->with('success_category', 'Раздел успешно добавлен');
     }
 
@@ -50,6 +64,12 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
+    }
+
+    public function show_by_slug($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+        return view('category', compact('category'));
     }
 
     /**

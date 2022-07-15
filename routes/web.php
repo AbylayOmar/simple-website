@@ -20,4 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/admin/categories', App\Http\Controllers\CategoryController::class);
+Route::get('/{Category:slug}', [App\Http\Controllers\CategoryController::class, 'show_by_slug'])->name('categories.show_by_slug');
+Route::resource('/categories', App\Http\Controllers\CategoryController::class);

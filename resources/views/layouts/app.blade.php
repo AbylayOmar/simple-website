@@ -30,6 +30,9 @@
                 </a>
             </div>
         </header>
+        @php 
+            $categories = \App\Models\Category::all();
+        @endphp
         <nav class="py-2 bg-light border-bottom">
             <div class="container d-flex flex-wrap">
             <ul class="nav me-auto">
@@ -41,7 +44,9 @@
                         Разделы
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        @foreach ($categories as $category)
+                            <li class="dropdown-item"><a href="{{ route('categories.show_by_slug', $category->slug) }}" class="link-dark">{{ $category->name }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
             </ul>
