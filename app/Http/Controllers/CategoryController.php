@@ -69,7 +69,8 @@ class CategoryController extends Controller
     public function show_by_slug($slug)
     {
         $category = Category::where('slug', $slug)->first();
-        return view('category', compact('category'));
+        $posts = $category->posts;
+        return view('category', compact('posts'));
     }
 
     /**
