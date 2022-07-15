@@ -11,7 +11,7 @@
                 </h3>
                 <img src="{{ $post->image }}" class="card-img-top img-fluid" alt="..." style="height: 15vh">
                 <div class="card-body">
-                    <p class="card-text text-center">{{ $post->description }}</p>
+                    <p class="card-text text-center">{{ Str::limit($post->description) }}</p>
                     <p class="card-text"><small class="text-muted">Просмотров: {{ $post->views }}</small></p>
                 </div>
             </div>
